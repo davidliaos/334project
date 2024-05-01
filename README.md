@@ -1,9 +1,13 @@
-334 Operating Systems Final Project
+## 334 Operating Systems Final Project
 
 David Liao - Shell
+
 Sylvia Paucar(sylp) - Path
+
 Joshi Joseph - Tree
+
 Jonathan Li - Exit
+
 Yousef Kharma(Miskeen) - List
 
 This assignment aims to provide experience with advanced programming techniques like process creation and control, file descriptors, signals, and possibly pipes. To do this, a team of students will work together to write their command shell - much like csh, bsh, or the DOS command shell. During the presentation, each student must:
