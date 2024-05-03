@@ -3,8 +3,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-void execute_tree() {
-    if (mkdir("Dir0", 0755) == -1) {    // created a directory called Dir0
+void tree() {
+    if (mkdir("Dir0", 0755) == -1) {    
         perror("Failed to create Dir0");
         return;
     }
@@ -14,7 +14,6 @@ void execute_tree() {
         return;
     }
 
-    // we have created the empty directory Dir1 inside dir0
     if (mkdir("Dir1", 0755) == -1) {
         perror("Failed to create Dir1");
         chdir("..");
@@ -22,9 +21,4 @@ void execute_tree() {
     }
 
     printf("Directories 'Dir0' and 'Dir0/Dir1' created successfully.\n");
-}
-
-int main() {
-    execute_tree();
-    return 0;
 }

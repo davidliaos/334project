@@ -4,30 +4,21 @@
 #include <fcntl.h>
 
 void path() {
-	// Get the current working directory
 	char cwd[1024]; 
 	if(getcwd(cwd, sizeof(cwd)) != NULL) {
 		printf("Current working directory: %s\n", cwd);
 
-		// Open/create file path.txt for writing
-		FILE *file = fopen("path.txt", "w"); // file in write mode
+		FILE *file = fopen("path.txt", "w"); 
 		if(file != NULL) {
 			fprintf(file, "Current working directory: %s\n", cwd);
-			fclose(file); // close the file
+			fclose(file); 
 			printf("Current working directory saved to path.txt\n");
 		}
-		else { // If opening the file failed, print fail message
+		else { 
 			printf("Failed to create or open path.txt\n");
 		}
 	}
-	else { // If getting current working directory failed, print fail message
+	else { 
 		printf("Failed to get current working directory\n");
 	}
 }
-
-int main() {
-	path();
-
-	return 0;
-}
-

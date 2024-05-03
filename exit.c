@@ -1,28 +1,42 @@
-// exit.c - Implements the 'exit' command for the custom shell
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <dirent.h>   
+#include <sys/stat.h> 
 
-// this function executes the 'exit' command
-void execute_exit() {
+void list_directory_contents() {
+    DIR *dir;
+    struct dirent *entry;
+    struct stat file_stat;
+    char *file_type;
+
+    if ((dir = opendir(".")) == NULL) {
+        perror("opendir() error");
+        exit(1);
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        stat(entry->d_name, &file_stat); 
+        if (S_ISDIR(file_stat.st_mode)) file_type = "Directory";
+        else if (S_ISREG(file_stat.st_mode)) file_type = "Regular file";
+        else file_type = "Other";
+
+        printf("%10s %ld %s\n", file_type, file_stat.st_size, entry->d_name);
+    }
+
+    closedir(dir);
+}
+
+void exit() {
     
     printf("Recent commands:\n");
 
-    // Print detailed list of all content in the directory that the command use is in
     printf("\nCurrent directory contents:\n");
-    system("ls -l");  // uses the  'ls -l' command to list directory contents
+    list_directory_contents();  
 
-    // waits for "return" to be press
+    
     printf("\nPress RETURN to exit...\n");
-    getchar();  // Wait for user input
-
-    // gets out of the shell
+    getchar();  
     exit(0);
 }
 
-int main() {
-    execute_exit();
-    return 0;
-}

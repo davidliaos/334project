@@ -6,10 +6,10 @@
 #include <sys/wait.h>
 
 
-extern void execute_tree();
-extern void execute_list();
-extern void execute_path();
-extern void execute_exit();
+extern void tree();
+extern void list();
+extern void path();
+extern void exit();
 
 void handle_sigint(int sig) {
     if (sig == SIGINT) {
@@ -58,7 +58,7 @@ int main() {
     while (1) {
         printf("myshell> ");
         if (!fgets(command, sizeof(command), stdin)) continue;
-        command[strcspn(command, "\n")] = '\0';  // Strip newline
+        command[strcspn(command, "\n")] = '\0';  
 
         if (strstr(command, "|")) {
             char *cmd1 = strtok(command, "|");
@@ -70,13 +70,13 @@ int main() {
             }
         } else {
             if (strcmp(command, "tree") == 0) {
-                execute_tree();
+                tree();
             } else if (strcmp(command, "list") == 0) {
-                execute_list();
+                list();
             } else if (strcmp(command, "path") == 0) {
-                execute_path();
+                path();
             } else if (strcmp(command, "exit") == 0) {
-                execute_exit();
+                exit();
             } else {
                 printf("Unknown command: %s\n", command);
             }
